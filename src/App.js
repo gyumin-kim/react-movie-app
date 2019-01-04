@@ -2,36 +2,60 @@ import React, { Component } from 'react';
 import './App.css';
 import Movie from './Movie';
 
-const movies = [
-  {
-    title: "Inception",
-    poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_UX182_CR0,0,182,268_AL_.jpg"
-  },
-  {
-    title: "Bohemian Rhapsody",
-    poster: "https://m.media-amazon.com/images/M/MV5BNDg2NjIxMDUyNF5BMl5BanBnXkFtZTgwMzEzNTE1NTM@._V1_UX182_CR0,0,182,268_AL_.jpg"
-  },
-  {
-    title: "American Psycho",
-    poster: "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/American_Psycho.png/220px-American_Psycho.png"
-  },
-  {
-    title: "Before Sunrise",
-    poster: "https://c-sf.smule.com/sf/s37/arr/86/02/3328f006-3ab6-4de7-ac01-4f6d31d97a25.jpg"
-  }
-]
-
 // All components should have render() function and return!
 class App extends Component {
+
+  // Component의 state가 바뀔 때마다, render()가 trigger된다
+  state = {
+
+  }
+
+  // Component가 갖고 있는 functions
+  /**
+   * Render: componentWillMount() -> render() -> componentDidMount()
+   */
+  componentDidMount() {
+    this._getMovies()
+  }
+
+  _renderMovies = () => {
+    // Component의 key로 index를 사용하는 것은 느리다
+    const movies = this.state.movies.map((movie) => {
+      return <Movie title={movie.title} poster={movie.medium_cover_image} key={movie.id} />
+    })
+    return movies;
+  };
+
+  _getMovies = async () => {
+    const movies = await this._callApi();
+    // await: 위 문장이 끝나기 전까지는(성공하든 실패하든) setState가 실행되지 않는다
+    this.setState({
+      // movies: movies와 같다. (이름이 같은 경우)
+      movies
+    })
+  };
+
+  _callApi = () => {
+    return fetch('https://yts.am/api/v2/list_movies.json?sort_by=download_count')
+    .then(response => response.json())
+    .then(json => json.data.movies)
+    .catch(err => console.err(err))
+  };
+
   render() {
     return (
       <div className="App">
-        {movies.map((movie, index) => {
-          return <Movie title={movie.title} poster={movie.poster} key={index} />
-        })}
+        {this.state.movies ? this._renderMovies() : 'Loading'}
       </div>
     );
   }
+
+  /**
+   * Update: componentWillReceiveProps() -> shouldComponentUpdate() -> componentWillUpdate() -> render() -> componentDidUpdate()
+   */
+  // componentWillReceiveProps(): 컴포넌트가 새로운 prop을 받았다
+  // shouldComponentUpdate(): 컴포넌트의 기존 prop에서 변경된 것이 있으면 'update == true'로 설정
+  // componentWillUpdate(): 'update == true'이면 update를 할 것이다.
 }
 
 export default App;
