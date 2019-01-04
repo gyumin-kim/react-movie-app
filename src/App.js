@@ -21,11 +21,17 @@ class App extends Component {
   _renderMovies = () => {
     // Component의 key로 index를 사용하는 것은 느리다
     const movies = this.state.movies.map((movie) => {
-      return <Movie title={movie.title} poster={movie.medium_cover_image} key={movie.id} />
+      return <Movie 
+        title={movie.title_english} 
+        poster={movie.medium_cover_image} 
+        genres={movie.genres} 
+        synopsis={movie.synopsis}
+        key={movie.id} />
     })
     return movies;
   };
 
+  // await를 쓰려면 바깥에 async가 있어야 한다
   _getMovies = async () => {
     const movies = await this._callApi();
     // await: 위 문장이 끝나기 전까지는(성공하든 실패하든) setState가 실행되지 않는다
