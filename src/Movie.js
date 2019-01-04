@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import LinesEllipsis from 'react-lines-ellipsis';
 import './Movie.css';
 
 /********* Class Component *********/
@@ -40,16 +41,22 @@ import './Movie.css';
 function Movie({title, poster, genres, synopsis}) {
   return (
     <div className="movie">
-      <div className="movie-columns">
+      <div className="movie-column">
         <MoviePoster poster={poster} alt={title} />
       </div>
-      <div className="movie-columns">
+      <div className="movie-column">
         <h1>{title}</h1>
         <div className="movie-genres">
           {genres.map((genre, index) => <MovieGenre genre={genre} key={index}/>)}
         </div>
         <p className="movie-synopsis">
-          {synopsis}
+          <LinesEllipsis
+            text={synopsis}
+            maxLine='3'
+            ellipsis='...'
+            trimRight
+            basedOn='letters'
+          />
         </p>
       </div>
     </div>
