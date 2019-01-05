@@ -26,6 +26,7 @@ class App extends Component {
         poster={movie.medium_cover_image} 
         genres={movie.genres} 
         synopsis={movie.synopsis}
+        imdb={movie.imdb_code}
         key={movie.id} />
     })
     return movies;
@@ -34,6 +35,7 @@ class App extends Component {
   // await를 쓰려면 바깥에 async가 있어야 한다
   _getMovies = async () => {
     const movies = await this._callApi();
+    console.log(movies);
     // await: 위 문장이 끝나기 전까지는(성공하든 실패하든) setState가 실행되지 않는다
     this.setState({
       // movies: movies와 같다. (이름이 같은 경우)

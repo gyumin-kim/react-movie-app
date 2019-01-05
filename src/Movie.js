@@ -38,11 +38,13 @@ import './Movie.css';
 // componentWillMount, function, updateState 등이 필요없고, lifecycle도 없고 그냥 return만 하는 component
 // 기존 class component(stateful)와 다른 점은, 클래스가 아니므로 this.props는 지우고 그냥 poster
 /********* Functional Component *********/
-function Movie({title, poster, genres, synopsis}) {
+function Movie({title, poster, genres, synopsis, imdb}) {
   return (
     <div className="movie">
       <div className="movie-column">
-        <MoviePoster poster={poster} alt={title} />
+        <a href={"https://www.imdb.com/title/" + imdb}>
+          <MoviePoster poster={poster} alt={title} />
+        </a>
       </div>
       <div className="movie-column">
         <h1>{title}</h1>
@@ -80,7 +82,8 @@ Movie.propTypes = {
   title: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
   genres: PropTypes.array.isRequired,
-  synopsis: PropTypes.string.isRequired
+  synopsis: PropTypes.string.isRequired,
+  imdb: PropTypes.string.isRequired
 }
 
 MoviePoster.propTypes = {
