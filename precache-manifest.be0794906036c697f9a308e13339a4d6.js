@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "053ee96d5bda23d43b52",
-    "url": "/react-movie-app/static/css/main.ff6a4fcf.chunk.css"
+    "revision": "1f14a880d52c9342019c",
+    "url": "/react-movie-app/static/css/main.4122938b.chunk.css"
   },
   {
-    "revision": "053ee96d5bda23d43b52",
-    "url": "/react-movie-app/static/js/main.053ee96d.chunk.js"
+    "revision": "1f14a880d52c9342019c",
+    "url": "/react-movie-app/static/js/main.1f14a880.chunk.js"
   },
   {
     "revision": "d120fdf0ddba1865b329",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/react-movie-app/static/js/runtime~main.bdcfacaf.js"
   },
   {
-    "revision": "e746578fd5b8c505dc181be0f0086f96",
+    "revision": "5fc7631ffff4e8f65ef5544c57825bd0",
     "url": "/react-movie-app/index.html"
   }
 ];
