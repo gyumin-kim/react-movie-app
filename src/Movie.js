@@ -42,7 +42,7 @@ function Movie({title, poster, genres, synopsis, imdb}) {
   return (
     <div className="movie">
       <div className="movie-column">
-        <a href={"https://www.imdb.com/title/" + imdb}>
+        <a href={`https://www.imdb.com/title/${imdb}`}>
           <MoviePoster poster={poster} alt={title} />
         </a>
       </div>
